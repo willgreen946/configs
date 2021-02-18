@@ -173,6 +173,8 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
+# The color stuff
+
 bindsym $mod+r mode "resize"
 
 set $bg-color		 #000000
