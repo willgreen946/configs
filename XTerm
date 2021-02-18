@@ -1,0 +1,6 @@
+XTerm*Background: black 
+XTerm*Foreground: #03A062
+XTerm*font: 9x15
+XTerm*saveLines: 1000
+
+
