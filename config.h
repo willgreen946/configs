@@ -20,7 +20,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1", "2", "3", "4", "5",  "6", "7", "8", "9", "10" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -59,6 +59,13 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+//Stuff I added
+//I could of just changed the termcmd but I might start using st
+static const char *xterm[] = {"xterm", NULL}; //A command to open xterm
+static const char *files[] = {"pcmanfm", NULL}; //A command to open pcmanfm
+static const char *mousepad[] = {"mousepad", NULL}; //A command to open mousepad
+static const char *firefox[] = {"firefox", NULL}; //A command to open firefox
+
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -76,7 +83,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_z,      killclient,     {0} }, //closes the program
 	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -85,7 +92,12 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY, 			XK_t,	   spawn,	   {.v = termcmd } }, //should open xterm		
+	//Commands I added
+	{ MODKEY,			XK_m,	   spawn,	   {.v = mousepad } }, //Should open mousepad
+	{ MODKEY,			XK_f,	   spawn,	   {.v = files } }, //Should open my file manager
+	{ MODKEY, 			XK_t,	   spawn,	   {.v = xterm } }, //Should open xterm
+	{ MODKEY, 			XK_w,	   spawn,	   {.v = firefox } }, //Should open firefox 
+	//End of keys I added	
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
