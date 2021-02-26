@@ -9,19 +9,14 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "freesans:size=10" };
 static const char dmenufont[]       = "freesans:size=10";
 static const char col_gray1[]       = "#000000";
-static const char col_gray2[]       = "#800080"; //this is the border around the window
+static const char col_gray2[]       = "#03A062"; //this is the border around the window
 static const char col_gray3[]       = "#FFFFFF"; //the numbers on the bar 
 static const char col_gray4[]       = "#000000"; 
-static const char col_cyan[]        = "#800080";
+static const char col_cyan[]        = "#03A062";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-	[SchemeStatus]  = { col_gray3, col_gray1,  "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
-	[SchemeTagsSel]  = { col_gray4, col_cyan,  "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
-    [SchemeTagsNorm]  = { col_gray3, col_gray1,  "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
-    [SchemeInfoSel]  = { col_gray4, col_cyan,  "#000000"  }, // infobar middle  selected {text,background,not used but cannot be empty}
-    [SchemeInfoNorm]  = { col_gray3, col_gray1,  "#000000"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
 };
 
 /* tagging */
@@ -66,10 +61,11 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 //Stuff I added
 //I could of just changed the termcmd but I might start using st
-static const char *xterm[] = {"xterm", NULL}; //A command to open xterm
-static const char *files[] = {"pcmanfm", NULL}; //A command to open pcmanfm
-static const char *mousepad[] = {"mousepad", NULL}; //A command to open mousepad
-static const char *firefox[] = {"firefox", NULL}; //A command to open firefox
+static const char *xterm[] = {"xterm", NULL}; //Open xterm
+static const char *files[] = {"pcmanfm", NULL}; //Open pcmanfm
+static const char *mousepad[] = {"mousepad", NULL}; //Open mousepad
+static const char *firefox[] = {"firefox", NULL}; //Open firefox
+static const char *virtualbox[] = {"VirtualBox", NULL}; //Open virtualbox
 
 
 static Key keys[] = {
@@ -100,8 +96,9 @@ static Key keys[] = {
 	//Commands I added
 	{ MODKEY,			XK_m,	   spawn,	   {.v = mousepad } }, //Should open mousepad
 	{ MODKEY,			XK_f,	   spawn,	   {.v = files } }, //Should open my file manager
-	{ MODKEY, 			XK_t,	   spawn,	   {.v = termcmd } }, //Should open xterm
+	{ MODKEY, 			XK_t,	   spawn,	   {.v = xterm } }, //Should open xterm
 	{ MODKEY, 			XK_w,	   spawn,	   {.v = firefox } }, //Should open firefox 
+	{ MODKEY,			XK_v,	   spawn,	   {.v = virtualbox } }, //Should open virtual box
 	//End of keys I added	
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
@@ -131,6 +128,4 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-
-
 
