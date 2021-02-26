@@ -6,21 +6,26 @@ static const unsigned int gappx     = 15;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "freesans:size=10" };
-static const char dmenufont[]       = "freesans:size=10";
+static const char *fonts[]          = { "freesans:size=12" };
+static const char dmenufont[]       = "freesans:size=12";
 static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#03A062"; //this is the border around the window
-static const char col_gray3[]       = "#FFFFFF"; //the numbers on the bar 
+static const char col_gray3[]       = "#ffffff"; //the numbers on the bar 
 static const char col_gray4[]       = "#000000"; 
 static const char col_cyan[]        = "#03A062";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeStatus]  = { col_gray3, col_gray1,  "#add8e6"  }, // Statusbar right {text,background,not used but cannot be empty}
+	[SchemeTagsSel]  = { col_gray4, col_cyan,  "#add8e6"  }, // Tagbar left selected {text,background,not used but cannot be empty}
+    [SchemeTagsNorm]  = { col_gray3, col_gray1,  "#add8e6"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
+    [SchemeInfoSel]  = { col_gray4, col_cyan,  "#add8e6"  }, // infobar middle  selected {text,background,not used but cannot be empty}
+    [SchemeInfoNorm]  = { col_gray3, col_gray1,  "#add8e6"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5",  "6", "7", "8", "9", "10" };
+static const char *tags[] = { "","","","", "", "", "", "", "" }; //To use these logos you need to install the 'font-awesome' package
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -39,8 +44,8 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ "",      tile },    /* first entry is default */
+	{ "",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 };
 
@@ -61,7 +66,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 //Stuff I added
 //I could of just changed the termcmd but I might start using st
-static const char *xterm[] = {"xterm", NULL}; //Open xterm
+static const char *terminal[] = {"st", NULL}; //Open a terminal
 static const char *files[] = {"pcmanfm", NULL}; //Open pcmanfm
 static const char *mousepad[] = {"mousepad", NULL}; //Open mousepad
 static const char *firefox[] = {"firefox", NULL}; //Open firefox
@@ -96,7 +101,7 @@ static Key keys[] = {
 	//Commands I added
 	{ MODKEY,			XK_m,	   spawn,	   {.v = mousepad } }, //Should open mousepad
 	{ MODKEY,			XK_f,	   spawn,	   {.v = files } }, //Should open my file manager
-	{ MODKEY, 			XK_t,	   spawn,	   {.v = xterm } }, //Should open xterm
+	{ MODKEY, 			XK_t,	   spawn,	   {.v = terminal } }, //Should open a terminal
 	{ MODKEY, 			XK_w,	   spawn,	   {.v = firefox } }, //Should open firefox 
 	{ MODKEY,			XK_v,	   spawn,	   {.v = virtualbox } }, //Should open virtual box
 	//End of keys I added	
