@@ -17,11 +17,11 @@ static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-	[SchemeStatus]  = { col_gray3, col_gray1,  "#add8e6"  }, // Statusbar right {text,background,not used but cannot be empty}
-	[SchemeTagsSel]  = { col_gray4, col_cyan,  "#add8e6"  }, // Tagbar left selected {text,background,not used but cannot be empty}
-    [SchemeTagsNorm]  = { col_gray3, col_gray1,  "#add8e6"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
-    [SchemeInfoSel]  = { col_gray4, col_cyan,  "#add8e6"  }, // infobar middle  selected {text,background,not used but cannot be empty}
-    [SchemeInfoNorm]  = { col_gray3, col_gray1,  "#add8e6"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
+	[SchemeStatus]  = { col_gray3, col_gray1,  "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
+	[SchemeTagsSel]  = { col_gray4, col_cyan,  "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
+        [SchemeTagsNorm]  = { col_gray3, col_gray1,  "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
+        [SchemeInfoSel]  = { col_gray4, col_cyan,  "#000000"  }, // infobar middle  selected {text,background,not used but cannot be empty}
+        [SchemeInfoNorm]  = { col_gray3, col_gray1,  "#000000"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
 };
 
 /* tagging */
@@ -35,6 +35,14 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	//I added these under here
+	//These make it so software opens the pages I want them to
+	{ "st",	      NULL,	  NULL,       1 << 1,       0,           -1 }, 
+	{ "Pcmanfm",  NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "Mousepad", NULL,       NULL,       1 << 4,       0,           -1 },
+	{ "Libreoffice", NULL,    NULL,       1 << 4,       0,           -1 },
+	{ "Thunderbird", NULL,    NULL,       1 << 5,       0,           -1 },
+	{ "VirtualBox",  NULL,    NULL,       1 << 7,       0,           -1 }, 
 };
 
 /* layout(s) */
@@ -64,14 +72,14 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-//Stuff I added
-//I could of just changed the termcmd but I might start using st
+
+//I added these so I can open all the apps I want from a keyboard shortcut
 static const char *terminal[] = {"st", NULL}; //Open a terminal
 static const char *files[] = {"pcmanfm", NULL}; //Open pcmanfm
 static const char *mousepad[] = {"mousepad", NULL}; //Open mousepad
 static const char *firefox[] = {"firefox", NULL}; //Open firefox
+static const char *email[] = {"thunderbird", NULL}; //Open an email client
 static const char *virtualbox[] = {"VirtualBox", NULL}; //Open virtualbox
-
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -100,6 +108,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	//Commands I added
 	{ MODKEY,			XK_m,	   spawn,	   {.v = mousepad } }, //Should open mousepad
+	{ MODKEY,			XK_e,	   spawn, 	   {.v = email } }, //Should open an email client
 	{ MODKEY,			XK_f,	   spawn,	   {.v = files } }, //Should open my file manager
 	{ MODKEY, 			XK_t,	   spawn,	   {.v = terminal } }, //Should open a terminal
 	{ MODKEY, 			XK_w,	   spawn,	   {.v = firefox } }, //Should open firefox 
